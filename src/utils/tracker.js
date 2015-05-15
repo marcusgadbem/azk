@@ -1,4 +1,4 @@
-import Azk from 'azk';
+`import Azk from 'azk';
 import { Q, _, config, log, t } from 'azk';
 import { meta as azkMeta } from 'azk';
 import { calculateHash } from 'azk/utils';
@@ -92,7 +92,10 @@ export class Tracker {
     }, opts);
 
     this.ids_keys = ids_keys;
-    this.insight  = new InsightKeenIo(opts);
+    this.insight  = new InsightKeenIoWithMeta(opts);
+
+    /**/console.log('\n>>---------\n this.insight:\n', require('util').inspect(this.insight, { showHidden: false, depth: null, colors: true }), '\n>>---------\n');/*-debug-*/
+
     this.meta     = {
       "ip_address"      : "${keen.ip}",
       "agent_session_id": this.loadAgentSessionId(),
@@ -191,26 +194,13 @@ export class Tracker {
 }
 
 export class InsightKeenIoWithMeta extends InsightKeenIo {
-
-  constructor() {
-    console.log("* Constructing InsightKeenIoWithMeta..");
-    super();
-    this.redefineOptOut();
+  get optOut() {
+    return azkMeta.get('optOut');
   }
 
-  redefineOptOut() {
-    Object.defineProperty(InsightKeenIo.prototype, 'optOut', {
-      get: function () {
-        console.log("* InsightKeenIoWithMeta.get...");
-        return azkMeta.get('optOut');
-      },
-      set: function (val) {
-        console.log("* InsightKeenIoWithMeta.set...");
-        azkMeta.set('optOut', val);
-      }
-    });
+  set optOut(val) {
+    azkMeta.set('optOut', val);
   }
-
 }
 
 // Default tracker
