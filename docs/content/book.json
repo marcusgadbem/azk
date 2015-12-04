@@ -10,9 +10,13 @@
       "anchors",
       "include",
       "-mathjax",
-      "ga"
+      "ga",
+      "hotjar"
   ],
   "pluginsConfig": {
+    "hotjar": {
+      "hjid": 110754
+    },
     "ga": {
       "token": "GA_UA_ID",
       "configuration": {
