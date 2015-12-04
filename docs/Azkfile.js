@@ -17,9 +17,10 @@ systems({
     command: "node_modules/.bin/gitbook serve --port $HTTP_PORT content",
     wait: {"retry": 20, "timeout": 2000},
     mounts: {
-      '/azk/#{manifest.dir}': path("."),
-      '/azk/CONTRIBUTING.md': path("../CONTRIBUTING.md"),
-      '/azk/node_modules': persistent("node_modules"),
+      '/azk/#{manifest.dir}' : path("."),
+      '/azk/CONTRIBUTING.md' : path("../CONTRIBUTING.md"),
+      '/azk/node_modules'    : persistent("node_modules"),
+      '/azk/#{manifest.dir}/content/node_modules': persistent("content-node_modules"),
     },
     scalable: {"default": 1},
     http: {
