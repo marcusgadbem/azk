@@ -11,7 +11,7 @@
       "include",
       "-mathjax",
       "ga",
-      "hotjar"
+      "hotjar@0.0.3"
   ],
   "pluginsConfig": {
     "hotjar": {
