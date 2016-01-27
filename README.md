@@ -1,128 +1,180 @@
-# azk [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/azukiapp/azk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Code Climate](https://codeclimate.com/github/azukiapp/azk/badges/gpa.svg)](https://codeclimate.com/github/azukiapp/azk)
-
-### A development environment orchestration tool
-
-`azk` lets developers easily and quickly install and configure their development environments. Period.
+<table width="100%" border="0">
+  <tr>
+    <td align="center">
+      <a href="http://azk.io"><img src="http://docs.azk.io/en/resources/images/azk-logo-high.png" align="left" width="202px" ></a>
+    </td>
+    <td>
+      <strong>azk</strong> is an open source engine to orchestrate development and test environments. <br/>
+    <br/>
+    [ <a href="https://gitter.im/azukiapp/azk">Chat Support</a> - <a href="http://azk.io/">Website</a> - <a href="http://azk.io/">Documentation</a> - <a href="https://github.com/azukiapp/azk/releases/latest">Lastest Release Notes</a> ]
+    </td>
+  </tr>
+</table>
 
 ![Usage of azk](https://github.com/azukiapp/azk/blob/master/src/pres/azk-screenflow-slow.gif?raw=true)
 
-## Quick start
+## Why azk?
 
-### Installing
+`TODO`
 
-```
+## Main Features (*)
+
+`TODO: 5 bullets on top`.
+
+* Built-in load-balancer that distributes requests among containers
+* Built-in DNS resolver;
+* Stream system's logs in real-time;
+* Map local source code and folders into containers dinamically;
+* Support for system provisioning and startup commands and scripts;
+* Generators for your chosen language;
+* Curated list of [images][azk_images] for systems, languages, databases and tools;
+
+## Quick Start
+
+### Requirements
+
+* 64-bit architecture machine
+* Mac OSX or Linux (Windows: [on the map](https://github.com/azukiapp/azk/issues/334#issuecomment-170603171))
+* bash (command-line tool available on virtually all unix systems)
+* Internet connection (only needed while downloading [system images](http://docs.azk.io/en/images))
+
+### Install & Run
+
+```sh
+# 1. Installing azk
+## recommended for Mac users
 $ curl -Ls http://azk.io/install.sh | bash
+
+# recommended for Linux users
+$ wget -qO- http://azk.io/install.sh | bash
+
+# 2. Run a project
+## Run Stringer project directly from Github which has an Azkfile
+## http://github.com/run-project/stringer
+$ azk start run-project/stringer
 ```
 
-Requirements:
+See [installation docs](http://docs.azk.io/en/installation/) for more details.
 
-* **Mac OS X:** [VirtualBox](https://www.virtualbox.org/), version 4.3.6+
-* **Linux:** [Docker][docker], version 1.2+
+## Setting up azk (*)
 
-For further details, please see the [docs](http://docs.azk.io/en/installation/index.html).
+### Starting a new project
 
-### Using `azk`
-
-#### Starting a new project
-
-If you are starting a new application project, you can already use `azk` to obtain the proper runtime as well the corresponding generators for your chosen language and then generate the application's basic structure. An example in Node.js would look like this:
+If you are starting a new application, you can use **azk** to obtain the proper runtime as well the corresponding generators for your chosen language and then generate the application's basic structure. An example in Node.js would look like this:
 
 ```bash
 $ cd ~/projects
 $ azk shell --image azukiapp/node # obtaining the runtime
-    # mkdir app-name
-    # npm init                    # building the application's basic structure
-    ...
-    # exit
-$ cd app-name
-$ azk init
-azk: `node` system was detected at 'app-name'
-azk: 'Azkfile.js' generated
 
-$ azk start
-```
-
-#### Using `azk` with an existing project
-
-When you have an application project that's already started, and want to use `azk` to streamline its development environment, all you have to do is:
-
-```bash
-$ cd [my_application_folder]
-$ azk init
-azk: 'Azkfile.js' generated
+# mkdir <my-app>
+# npm init      # generate app's basic structure
 ...
+# exit
+
+$ cd <my-app>
+
+# will detect to detect your app language and suggest and base Azkfile
+$ azk init
+azk: `node` system was detected at 'my-app'
+azk: 'Azkfile' generated
+
 $ azk start
 ```
 
-## Main features
+### Using azk with an existing project
 
-* Multiplatform: Works both on Linux & Mac OS X (requires 64-bit platform);
-  * Windows planned. Want azk to run in Windows? Thumbs up here: https://github.com/azukiapp/azk/issues/334
-* Images: via [azk images][azk_images], [Docker Registry][docker_registry] or run your own Dockerfile;
-* Built-in load-balancer;
-* Built-in file sync;
-* Automatic start-up (and reload) script;
-* Logging;
-* And simple and easy to use DSL to describe systems architecture;
-
-## Documentation
-
-You can find our documentation online at: http://docs.azk.io/
-
-## `Run Project` button
-
-Clicking the `Run Project` button (or "azk button") on a GitHub repo is the best way to quickly and safely run its code on your local machine.
-
-![Run project](https://s3-sa-east-1.amazonaws.com/assets.azk.io/run-project-illustrative.png)
-
-To add a `Run Project` button to a repo, you'll just need to add an Azkfile.js to the project and put the following badge in your README.md file (the following example is for a hypothetical repository with the URL `https://github.com/username/repo` and a branch called `azkfile` containing the Azkfile.js):
-
-```
-[![Run project](https://s3-sa-east-1.amazonaws.com/assets.azk.io/run-project.png)](http://run.azk.io/start/?repo=username/repo&ref=azkfile)
-```
-
-Check out the [`Run Project` Gallery][run_project_gallery] for examples of up to date forks of popular projects using it.
-
-## Deploying
-
-After you locally run a project using [`Run Project` button](#run-project-button), deploying it to [DigitalOcean](http://digitalocean.com/) is very simple.
-
-First, put your [personal access token](https://cloud.digitalocean.com/settings/applications) into a `.env` file:
+When you already have a codebase for your application and want to use **azk** to streamline the development environment, all you have to do is:
 
 ```bash
-$ cd path/to/the/project
+$ cd <my-app>
+
+# will detect to detect your app language and suggest and base Azkfile
+$ azk init
+...
+azk: 'Azkfile' generated
+
+$ azk start
+```
+
+## Writing a Azkfile
+
+**Azkfile** is the cornerstone of how to use azk. This simple manifest file describe your application architecture, folders mapping and links between the specified systems.
+
+It is expected that the **Azkfile** will be included within the application files in your version control. This allows other team members to use **azk** to quickly run and control the whole application environment on their own machines without further efforts.
+The **azk cli** will look recursively for an **Azkfile** from the the directory you are browsing.
+
+See [Azkfile docs][azkfile] for more details.
+
+### Examples
+
+  * [Ruby on Rails with MySQL](#ruby-on-rails-app-with-mysql)
+  * [Node.js with MongoDB](#nodejs-app-with-mongodb)
+
+## Usage
+
+See [command-line docs](http://docs.azk.io) for a full summary.
+
+#### start
+
+```sh
+# azk start [<system>] [--reprovision --rebuild --no-remove --open]
+$ azk start <system> --reprovision                     # starts a system and reprovision
+
+# azk start [<git-repo>] [<dest-path>] [--git-ref=<git-ref>] [--reprovision --rebuild --no-remove --open]
+$ azk start git@github.com:azukiapp/azkdemo.git        # clone and start (SSH)
+$ azk start https://github.com/azukiapp/azkdemo        # clone and start (https)
+$ azk start https://github.com/azukiapp/azkdemo#master # clone master
+$ azk start azukiapp/azkdemo /tmp/azkdemoDest          # clone and start (to /tmp/azkdemoDest folder)
+$ azk start azukiapp/azkdemo --git-ref <master|0.0.1|880d01a>  # branch, tag or commit (relative to ./azkdemo folder)
+```
+
+See [azk start docs](http://docs.azk.io) for more details.
+
+#### scale
+
+```sh
+$ azk scale <system> 2
+```
+
+See [azk scale docs](http://docs.azk.io) for more details.
+
+#### logs
+
+```sh
+$ azk logs <system> [--follow]
+```
+
+See [azk logs docs](http://docs.azk.io) for more details.
+
+#### status
+
+```sh
+$ azk status
+```
+
+See [azk status docs](http://docs.azk.io) for more details.
+
+#### deploy
+
+`azk` knows how to deploy your application on [DigitalOcean](https://digitalocean.com/).
+
+```sh
 $ echo "DEPLOY_API_TOKEN=<YOUR-PERSONAL-ACCESS-TOKEN>" >> .env
+$ azk deploy
 ```
 
-Then, just run the following:
+See [azk deploy docs](http://docs.azk.io/en/deploy) for more details.
 
-```bash
-$ azk shell deploy
-```
+## FAQ / Troubleshooting
 
-Find further instructions on how to deploy to DigitalOcean using `azk` [here](http://docs.azk.io/en/deploy/README.html).
+* FAQ: [http://docs.azk.io/en/faq/](http://docs.azk.io/en/faq/)
+* Troubleshooting: [http://docs.azk.io/en/troubleshooting/](http://docs.azk.io/en/troubleshooting/)
 
-### Basic Vocabulary
+## Contributing
 
-#### System of Systems
+See [Contributing Guide](CONTRIBUTING.md) for instructions on how to help the project!
 
-`azk` is based on the concept of [System of Systems][sos]. Accordingly, applications (your code), services and workers (such as databases, webservers and queue systems) are treated as systems that communicate with each other and together make the primary system. Using this paradigm, `azk` installs and manages development environments. While this may seem overkill at first, it actually makes it a lot easier to manage the development and execution environments of an application (in its parts - the "systems" - or in its entirety - the full "system of systems").
-
-#### Images
-
-In order to automate the provisioning of development environments, `azk` uses pre-built custom images. These images follow the [Docker][docker] standard and can be found in: [azk images][azk_images], [Docker Index][docker_hub] or [Dockerfile][dockerfile].
-
-#### Azkfile.js
-
-`Azkfile.js` files are the cornerstone of how to use `azk`. These simple manifest files describe the systems that make your system of systems as well as the images used in their execution. They also describe parameters and execution options.
-
-More information [here][azkfile].
-
-## Contributions
-
-Check our [Contributing Guide](CONTRIBUTING.md) for instructions on how to help the project!
-
-Share the love and star us here in Github!
+Share the love and star us here on Github!
 
 ## License
 
@@ -132,11 +184,6 @@ Share the love and star us here in Github!
 
 Check LEGAL and LICENSE files for more information.
 
-[sos]: http://en.wikipedia.org/wiki/System_of_systems
 [docker]: http://docker.com
 [azk_images]: http://images.azk.io
-[docker_hub]: https://registry.hub.docker.com/
-[dockerfile]: http://dockerfile.github.io
-[docker_registry]: http://registry.hub.docker.com
 [azkfile]: http://docs.azk.io/en/azkfilejs/README.html
-[run_project_gallery]: https://github.com/run-project/gallery
