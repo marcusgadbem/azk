@@ -61,8 +61,7 @@ See [installation docs](http://docs.azk.io/en/installation/) for more details.
 ### Using azk with an existing project
 
 When you already have a codebase for your application and want to use **azk** to streamline the development environment, you take advantage of our `generators`.
-`Generators` will look at your codebase and do the heavy lifting of figuring out how your application is designed and suggest a base **Azkfile**.
-All you have to do is:
+`Generators` will look at your codebase and do the heavy lifting of figuring out how your application is designed and suggest a base **Azkfile**. All you have to do is:
 
 ```bash
 $ cd <my-app>
@@ -81,12 +80,15 @@ If you are starting a new application, you can use **azk** to obtain the proper 
 
 ```bash
 $ cd ~/projects
-$ azk shell --image azukiapp/node # obtaining the runtime
+# obtain the node + npm runtime to start new npm project
+# runtime info: https://hub.docker.com/r/azukiapp/node/~/dockerfile/
+$ azk shell --image azukiapp/node
 
-# mkdir <my-app>
-# npm init      # generate app's basic structure
+## inside container:
+## mkdir <my-app>
+## npm init      # generate app's basic structure
 ...
-# exit
+## exit
 
 $ cd <my-app>
 
@@ -99,7 +101,7 @@ $ azk start
 ```
 
 
-## Writing a Azkfile
+## Writing an Azkfile
 
 **Azkfile** is the cornerstone of how to use azk. This simple manifest file describe your application architecture, folders mapping and links between the specified systems.
 
