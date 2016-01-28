@@ -84,15 +84,16 @@ $ cd ~/projects
 # runtime info: https://hub.docker.com/r/azukiapp/node/~/dockerfile/
 $ azk shell --image azukiapp/node
 
-## inside container:
-## mkdir <my-app>
-## npm init      # generate app's basic structure
+## ...and inside container:
+# mkdir my-node-app
+# cd my-node-app
+# npm init      # generate app's basic structure
 ...
-## exit
+# exit
 
-$ cd <my-app>
+$ cd my-node-app
 
-# will detect to detect your app language and suggest and base Azkfile
+## will detect to detect your app language and suggest and base Azkfile
 $ azk init
 azk: `node` system was detected at 'my-app'
 azk: 'Azkfile' generated
