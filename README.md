@@ -56,9 +56,26 @@ $ azk start run-project/stringer
 
 See [installation docs](http://docs.azk.io/en/installation/) for more details.
 
-## Setting up azk (*)
+## Setting up a project
 
-### Starting a new project
+### Using azk with an existing project
+
+When you already have a codebase for your application and want to use **azk** to streamline the development environment, you take advantage of our `generators`.  
+`Generators` will look at your codebase and do the heavy lifting of figuring out how your application is designed and suggest a base **Azkfile**.  
+All you have to do is:
+
+```bash
+$ cd <my-app>
+
+# will detect to detect your app language and suggest and base Azkfile
+$ azk init
+...
+azk: 'Azkfile' generated
+
+$ azk start
+```
+
+### Using azk with a new project
 
 If you are starting a new application, you can use **azk** to obtain the proper runtime as well the corresponding generators for your chosen language and then generate the application's basic structure. An example in Node.js would look like this:
 
@@ -81,20 +98,6 @@ azk: 'Azkfile' generated
 $ azk start
 ```
 
-### Using azk with an existing project
-
-When you already have a codebase for your application and want to use **azk** to streamline the development environment, all you have to do is:
-
-```bash
-$ cd <my-app>
-
-# will detect to detect your app language and suggest and base Azkfile
-$ azk init
-...
-azk: 'Azkfile' generated
-
-$ azk start
-```
 
 ## Writing a Azkfile
 
