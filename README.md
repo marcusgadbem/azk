@@ -60,8 +60,8 @@ See [installation docs](http://docs.azk.io/en/installation/) for more details.
 
 ### Using azk with an existing project
 
-When you already have a codebase for your application and want to use **azk** to streamline the development environment, you take advantage of our `generators`.  
-`Generators` will look at your codebase and do the heavy lifting of figuring out how your application is designed and suggest a base **Azkfile**.  
+When you already have a codebase for your application and want to use **azk** to streamline the development environment, you take advantage of our `generators`.
+`Generators` will look at your codebase and do the heavy lifting of figuring out how your application is designed and suggest a base **Azkfile**.
 All you have to do is:
 
 ```bash
@@ -119,29 +119,27 @@ See [command-line docs](http://docs.azk.io) for a full summary.
 
 #### start
 
-```sh
-# azk start [<system>] [--reprovision --rebuild --no-remove --open]
-$ azk start <system> --reprovision                     # starts a system and reprovision
+Starts a system and it's dependencies described in Azkfile.
 
-# azk start [<git-repo>] [<dest-path>] [--git-ref=<git-ref>] [--reprovision --rebuild --no-remove --open]
-$ azk start git@github.com:azukiapp/azkdemo.git        # clone and start (SSH)
-$ azk start https://github.com/azukiapp/azkdemo        # clone and start (https)
-$ azk start https://github.com/azukiapp/azkdemo#master # clone master
-$ azk start azukiapp/azkdemo /tmp/azkdemoDest          # clone and start (to /tmp/azkdemoDest folder)
-$ azk start azukiapp/azkdemo --git-ref <master|0.0.1|880d01a>  # branch, tag or commit (relative to ./azkdemo folder)
+```sh
+$ azk start <system> [--reprovision --rebuild --no-remove --open]
 ```
 
 See [azk start docs](http://docs.azk.io) for more details.
 
 #### scale
 
+Scale a system to a new total of containers.
+
 ```sh
-$ azk scale <system> 2
+$ azk scale <system> 3
 ```
 
 See [azk scale docs](http://docs.azk.io) for more details.
 
 #### logs
+
+Stream a system's log in real-time.
 
 ```sh
 $ azk logs <system> [--follow]
@@ -151,8 +149,10 @@ See [azk logs docs](http://docs.azk.io) for more details.
 
 #### status
 
+Check a system status.
+
 ```sh
-$ azk status
+$ azk status <system>
 ```
 
 See [azk status docs](http://docs.azk.io) for more details.
