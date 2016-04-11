@@ -1,13 +1,12 @@
 <table width="100%" border="0">
   <tr>
     <td align="center">
-      <a href="http://azk.io"><img src="http://docs.azk.io/en/resources/images/azk-logo-high.png" align="left" width="202px" ></a>
-       </td>
+      <a href="http://azk.io"><img src="http://docs.azk.io/en/resources/images/azk-logo-high.png" align="left" width="250px" ></a>
+    </td>
     <td>
       <!--<strong>azk</strong> is an open source engine to orchestrate development and test environments. <br/>-->
       <strong>azk</strong> is a lightweight open source orchestration tool for development environments.  <br/>
-    <br/>
-    [ <a href="https://gitter.im/azukiapp/azk">Chat Support</a> - <a href="http://azk.io/">Website</a> - <a href="http://azk.io/">Documentation</a> - <a href="https://github.com/azukiapp/azk/releases/latest">Lastest Release Notes</a> ]
+      [ <a href="#quick-start">Install</a> - <a href="https://gitter.im/azukiapp/azk">Chat Support</a> - <a href="http://azk.io/">Website</a> - <a href="http://azk.io/">Documentation</a> - <a href="https://github.com/azukiapp/azk/releases/latest">Lastest Release Notes</a> ]
     </td>
   </tr>
 </table>
@@ -18,6 +17,19 @@
 
 `TODO`
 
+* **Freedom**:
+* **Parity**:
+* **Automation**:
+* **Isolation**:
+
+`Keywords: Paridade(dev/prod, workmates), liberdade, automação, isolamento`
+
+Have you ever gotten an application running on your local workstation, only to find the setup is completely different when you deploy it to a production server?
+
+azk makes it quick and easy to run not just the application but all of its dependencies, including the required OS, languages, frameworks, databases and other dependencies ~~(an otherwise labor-intensive, repetitive, long, and thus error-prone task)~~, whether you're on your local environment or a server.
+
+azk takes care of many steps behind the scenes to make orchestration easier. So, this tutorial contains a few optional steps which are not strictly necessary to set up the sample app, but explain what azk is doing.
+
 ## Main Features (*)
 
 `TODO: 5 bullets on top`.
@@ -27,7 +39,7 @@
 * Stream system's logs in real-time;
 * Map local source code and folders into containers dinamically;
 * Support for system provisioning and startup commands and scripts;
-* Generators for your chosen language;
+* Suggestions for your chosen language;
 * Curated list of [images][azk_images] for systems, languages, databases and tools;
 
 ## Quick Start
@@ -38,8 +50,6 @@
   * **Mac OS X 10.6 (Snow Leopard)** or later (requires [**VirtualBox**](https://www.virtualbox.org/wiki/Downloads))
   * **Ubuntu 12.04, 14.04** or **15.10**
   * **Fedora 21** or **22**
-* bash, the command-line tool available on all unix systems
-* internet connection (only needed while downloading [system images](http://docs.azk.io/en/images))
 
 Don't worry about **Windows** support, it is [on the map](https://github.com/azukiapp/azk/issues/334#issuecomment-170603171).
 
@@ -69,39 +79,48 @@ See [installation docs](http://docs.azk.io/en/installation/) for more details.
 If you are starting a new application, you can use **azk** to obtain the proper runtime as well the corresponding generators for your chosen language and then generate the application's basic structure. An example in Node.js would look like this:
 
 ```sh
-$ cd ~/projects
-$ azk shell --image azukiapp/node # obtaining the runtime
+$ mkdir my-app && cd my-app # or whatever you want to name the new project
+$ azk shell --image azukiapp/node
+# `azk shell` will spin up a container with the Node.js runtime
+# in this new context, the `npm` command will be available
 
-# mkdir <my-app>
-# npm init      # generate app's basic structure
-...
-# exit
+> npm init # generates the package.json file for your app
+> exit
 
-$ cd <my-app>
-
-# will detect to detect your app language and suggest and base Azkfile
+# azk will detect your app stack (Node.js in this case) and suggest a base Azkfile
 $ azk init
-azk: `node` system was detected at 'my-app'
-azk: 'Azkfile' generated
+azk: [my-app] `node` system was detected at 'my-app'
+...
+azk: [my-app] 'Azkfile.js' generated
 
+# now we have an Azkfile, let's start the systems
 $ azk start
 ```
 
 ### Using azk with an existing project
 
-When you already have a codebase for your application and want to use **azk** to streamline the development environment, you can take advantage of the `generators`.
-`Generators` will look at your codebase and do the heavy lifting of figuring out how your application is designed and suggest a base **Azkfile**.
+When you already have a codebase for your application and want to use **azk** to streamline the development environment, you can take advantage of the `suggestions`.
+`Suggestions` will look at your codebase and do the heavy lifting of figuring out what is your application's stack and suggest a base **Azkfile** for it.
 
 All you have to do is:
 
 ```sh
-$ cd <my-app>
+# navigate into your app folder
+$ cd my-app
+
+# azk will detect your app stack and suggest a base Azkfile
 $ azk init
-
-# will detect to detect your app language and suggest and base Azkfile
 ...
-azk: 'Azkfile' generated
+azk: [my-app] 'Azkfile.js' generated
+```
 
+Check the generated Azkfile. You may need to make couple adjustments to it such as:
+* Verify the env vars (`.env` file, `envs` and `export_envs` properties)
+* Check `provision` and `command` properties
+* Adjust your app to connect to the database using the `DATABASE_URL` env var
+
+```sh
+# now we have an ready Azkfile, let's start the systems
 $ azk start
 ```
 
@@ -119,65 +138,9 @@ See [Azkfile docs][azkfile] for more details.
   * [Ruby on Rails with MySQL](#ruby-on-rails-app-with-mysql)
   * [Node.js with MongoDB](#nodejs-app-with-mongodb)
 
-## Usage
+## Command-line reference
 
-See [command-line docs](http://docs.azk.io) for a full summary.
-
-#### start
-
-Starts a single or a set of systems described in the manifest file (Azkfile.js).
-
-```sh
-# start app from local source
-$ azk start -vvv -o [<system>] [--reprovision]
-
-# start app directly from GitHub
-$ azk start git@github.com:azukiapp/azkdemo.git        # clone and start (SSH)
-$ azk start azukiapp/azkdemo --git-ref <master|0.0.1|880d01a>  # branch, tag or commit (relative to ./azkdemo folder)
-```
-
-See [azk start docs](http://docs.azk.io) for more details.
-
-#### scale
-
-Scales a system to a total number of containers.
-
-```sh
-$ azk scale <system> 2
-```
-
-See [azk scale docs](http://docs.azk.io) for more details.
-
-#### logs
-
-Streams a system's log in real-time
-
-```sh
-$ azk logs <system> [--follow]
-```
-
-See [azk logs docs](http://docs.azk.io) for more details.
-
-#### status
-
-Check all described system status.
-
-```sh
-$ azk status [add opção json?]
-```
-
-See [azk status docs](http://docs.azk.io) for more details.
-
-#### deploy
-
-`azk` knows how to deploy your application on [DigitalOcean](https://digitalocean.com/).
-
-```sh
-$ echo "DEPLOY_API_TOKEN=<YOUR-PERSONAL-ACCESS-TOKEN>" >> .env
-$ azk deploy
-```
-
-See [azk deploy docs](http://docs.azk.io/en/deploy) for more details.
+See [command-line docs](http://docs.azk.io/en/reference/cli) for a full summary of commands.
 
 ## FAQ / Troubleshooting
 
