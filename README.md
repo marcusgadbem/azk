@@ -1,15 +1,95 @@
-<table width="100%" border="0">
-  <tr>
-    <td align="center">
-      <a href="http://azk.io"><img src="http://docs.azk.io/en/resources/images/azk-logo-high.png" align="left" width="250px" ></a>
-    </td>
-    <td>
-      <!--<strong>azk</strong> is an open source engine to orchestrate development and test environments. <br/>-->
-      <strong>azk</strong> is a lightweight open source orchestration tool for development environments.  <br/>
-      [ <a href="#quick-start">Install</a> - <a href="https://gitter.im/azukiapp/azk">Chat Support</a> - <a href="http://azk.io/">Website</a> - <a href="http://azk.io/">Documentation</a> - <a href="https://github.com/azukiapp/azk/releases/latest">Lastest Release Notes</a> ]
-    </td>
-  </tr>
+<a href="http://azk.io"><img src="https://azk-landapage-stage.s3.amazonaws.com/readme-logo.png" ></a>
+<br/>
+<strong>azk</strong> is a lightweight open source orchestration tool for development environments.
+<br/>
+
+--
+
+<table>
+  <thead>
+    <tr>
+      <td align="center">
+        <a href="#"><img src="http://azk-landapage-stage.s3.amazonaws.com/install.png"></a>
+      </td>
+      <td align="center">
+        <a href="#"><img src="http://azk-landapage-stage.s3.amazonaws.com/chat-support.png"></a>
+      </td>
+      <td align="center">
+        <a href="#"><img src="http://azk-landapage-stage.s3.amazonaws.com/website.png"></a>
+      </td>
+      <td align="center">
+        <a href="#"><img src="http://azk-landapage-stage.s3.amazonaws.com/documentation.png"></a>
+      </td>
+      <td align="center">
+        <a href="#"><img src="http://azk-landapage-stage.s3.amazonaws.com/latest-release-notes.png"></a>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="http://azk.io/">Install</a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io/">Chat Support</a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io/">Website</a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io/">Documentation</a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io/">Latest Release Notes</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+--
+
+<table>
+    <tr>
+      <td align="center">
+        <a href="http://azk.io">
+          <img src="http://azk-landapage-stage.s3.amazonaws.com/install.png">
+          <br/>
+          Install
+          </a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io">
+          <img src="http://azk-landapage-stage.s3.amazonaws.com/chat-support.png">
+          <br/>
+          Chat Support
+        </a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io">
+          <img src="http://azk-landapage-stage.s3.amazonaws.com/website.png">
+          <br/>
+          Website
+        </a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io">
+          <img src="http://azk-landapage-stage.s3.amazonaws.com/documentation.png">
+          <br/>
+          Documentation
+        </a>
+      </td>
+      <td align="center">
+        <a href="http://azk.io">
+          <img src="http://azk-landapage-stage.s3.amazonaws.com/latest-release-notes.png">
+          <br/>
+          Latest Release Notes
+        </a>
+      </td>
+    </tr>
+</table>
+
+--
+
 
 ![Usage of azk](https://github.com/azukiapp/azk/blob/master/src/pres/azk-screenflow-slow.gif?raw=true)
 
@@ -17,8 +97,8 @@
 
 `TODO`
 
-* **Freedom**:
-* **Parity**:
+* **Freedom**: never been so easy to switch stacks. Add, remove and re-config system's language, database or components in a few minutes.
+* **Parity**: Azkfile will guarantee systems will work exactly the same no matter where. Anyone, with azk, can streamline the application with the a proper Azkfile so precisely and quickly that the focus can remain on what interests: coding.
 * **Automation**:
 * **Isolation**:
 
